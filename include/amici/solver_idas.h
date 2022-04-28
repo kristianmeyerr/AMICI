@@ -107,6 +107,9 @@ class IDASolver : public Solver {
     void setNonLinearSolverB(int which) const override;
 
   protected:
+
+    void setMaxErrorTestsSolver(size_t mxsteps) const override;
+
     /**
      * @brief Postprocessing of the solver memory after a discontinuity
      * @param ida_mem pointer to IDAS solver memory object

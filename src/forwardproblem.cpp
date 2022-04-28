@@ -61,6 +61,7 @@ void ForwardProblem::workForwardProblem() {
     if (presimulate)
         t0 -= edata->t_presim;
     solver->setup(t0, model, x_, dx_, sx_, sdx_);
+    solver->apply_max_error_test_fails();
 
     /* perform presimulation if necessary */
     if (presimulate) {

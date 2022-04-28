@@ -301,6 +301,10 @@ void Solver::storeDiagnosisB(const int which) const {
     nnlscfB_.push_back(static_cast<int>(number));
 }
 
+void Solver::apply_max_error_test_fails() const{
+    setMaxErrorTestsSolver(maxErrorTestFails_);
+}
+
 void Solver::initializeLinearSolver(const Model *model) const {
     switch (linsol_) {
 

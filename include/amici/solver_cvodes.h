@@ -94,6 +94,8 @@ class CVodeSolver : public Solver {
 
   protected:
 
+    void setMaxErrorTestsSolver(size_t mxsteps) const override;
+
     void calcIC(realtype tout1) const override;
 
     void calcICB(int which, realtype tout1) const override;

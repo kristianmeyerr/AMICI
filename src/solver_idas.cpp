@@ -369,6 +369,12 @@ void IDASolver::reInitPostProcessB(const realtype tnext) const {
     force_reinit_postprocess_B_ = false;
 }
 
+void IDASolver::setMaxErrorTestsSolver(size_t mxsteps) const {
+    int status = IDASetMaxErrTestFails(solver_memory_.get(), static_cast<int>(mxsteps));
+    if (status != IDA_SUCCESS)
+        throw CvodeException(status, "CVodeSetMaxErrTestFails");
+}
+
 void IDASolver::reInitPostProcess(void *ami_mem, realtype *t,
                                   AmiVector *yout, AmiVector *ypout,
                                   realtype tout) const {

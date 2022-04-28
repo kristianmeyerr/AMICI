@@ -775,6 +775,12 @@ void *CVodeSolver::getAdjBmem(void *ami_mem, int which) const {
     return CVodeGetAdjCVodeBmem(ami_mem, which);
 }
 
+void CVodeSolver::setMaxErrorTestsSolver(size_t mxsteps) const {
+    int status = CVodeSetMaxErrTestFails(solver_memory_.get(), static_cast<int>(mxsteps));
+    if (status != CV_SUCCESS)
+        throw CvodeException(status, "CVodeSetMaxErrTestFails");
+}
+
 void CVodeSolver::calcIC(const realtype /*tout1*/) const {};
 
 void CVodeSolver::calcICB(const int /*which*/, const realtype /*tout1*/) const {};

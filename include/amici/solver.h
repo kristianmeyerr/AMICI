@@ -490,6 +490,17 @@ class Solver {
     void setMaxSteps(long int maxsteps);
 
     /**
+     * @brief Sets the maximum number of error test failures for the forward problem
+     * @param maxfails max fails
+     */
+    void setMaxErrorTests(long int maxfails);
+
+    /**
+     * @brief Apply the maximum number of error test failures for the forward problem
+     */
+    void apply_max_error_test_fails() const;
+
+    /**
      * @brief Returns the maximum time allowed for integration
      * @return Time in seconds
      */
@@ -951,6 +962,14 @@ class Solver {
     AmiciApplication *app = &defaultContext;
 
   protected:
+
+    /**
+     * @brief specifies the maximum number of error test failures permitted in attempting one step.
+     *
+     * @param mxfails max number of fails
+     */
+    virtual void setMaxErrorTestsSolver(size_t mxfails) const = 0;
+
     /**
      * @brief Sets a timepoint at which the simulation will be stopped
      *
@@ -1615,6 +1634,9 @@ class Solver {
 
     /** maximum number of allowed integration steps */
     long int maxsteps_ {10000};
+
+    /** maximum number of error test failures */
+    long int maxErrorTestFails_ {7};
 
     /** Maximum wall-time for integration in seconds */
     std::chrono::duration<double, std::ratio<1>> maxtime_ {std::chrono::duration<double>::max()};
